@@ -1,0 +1,18 @@
+PODS:
+  - APIKit (3.1.1):
+    - Result (~> 3.0)
+  - konashi-ios-sdk (4.1.0)
+  - Result (3.1.0)
+
+DEPENDENCIES:
+  - APIKit (~> 3.0)
+  - konashi-ios-sdk
+
+SPEC CHECKSUMS:
+  APIKit: 7460983f490d3bde6aaaaa4164d18c9865a6f91d
+  konashi-ios-sdk: dd545f091380e8adf58114bf270f24f79d8b96cc
+  Result: 4e3ed5995ed94d0cd6a09be9a431fce3f3624bbf
+
+PODFILE CHECKSUM: 40726351c9186a4423004f385ecf352e8f19fe73
+
+COCOAPODS: 1.1.0.rc.2
