@@ -21,7 +21,7 @@ struct CycleChangerApiRequest: Request {
     }
     
     var path: String {
-        return "/api/items"
+        return "/api/items/level"
     }
     
     func response(from object: Any, urlResponse: HTTPURLResponse) throws -> Item {
@@ -30,11 +30,13 @@ struct CycleChangerApiRequest: Request {
 }
 
 struct Item {
-    let items: NSArray
+    let level: Int
     
     init(object: Any) throws {
-        let dictionary = object as? NSArray
-        let items = dictionary
-        self.items = items!
+        guard let dictionary = object as? [String: Int],
+        let level = dictionary["level"] else {
+            throw ResponseError.unexpectedObject(object)
+        }
+        self.level = level
     }
 }

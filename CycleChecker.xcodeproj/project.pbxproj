@@ -17,6 +17,7 @@
 		213BB7C01E1C6DEE002B324F /* CycleCheckerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 213BB7BF1E1C6DEE002B324F /* CycleCheckerUITests.swift */; };
 		215E56931E206CC00053CD2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 215E56921E206CC00053CD2C /* AVFoundation.framework */; };
 		219AD8F01E434F74005ED7CC /* CycleChangerApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 219AD8EF1E434F74005ED7CC /* CycleChangerApi.swift */; };
+		219AD8F21E46E002005ED7CC /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 219AD8F11E46E002005ED7CC /* AudioToolbox.framework */; };
 		461E6C0DAC158BE29883D19C /* Pods_CycleCheckerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B57467ABFB4832BB5E0D7125 /* Pods_CycleCheckerUITests.framework */; };
 		63E3679A11E06B89A59E6514 /* Pods_CycleCheckerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35BE0729D3AE2850000FCBBF /* Pods_CycleCheckerTests.framework */; };
 		A2082AF375B96FDF808F201C /* Pods_CycleChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3D2B0E5171507BBBF3C8F44 /* Pods_CycleChecker.framework */; };
@@ -57,6 +58,7 @@
 		213BB7C11E1C6DEE002B324F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		215E56921E206CC00053CD2C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		219AD8EF1E434F74005ED7CC /* CycleChangerApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CycleChangerApi.swift; sourceTree = "<group>"; };
+		219AD8F11E46E002005ED7CC /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		2ED1E9367D6E7DF4290559B2 /* Pods-CycleChecker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CycleChecker.release.xcconfig"; path = "Pods/Target Support Files/Pods-CycleChecker/Pods-CycleChecker.release.xcconfig"; sourceTree = "<group>"; };
 		35BE0729D3AE2850000FCBBF /* Pods_CycleCheckerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CycleCheckerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		472596020CCBFDBBD4B8383A /* Pods-CycleCheckerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CycleCheckerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CycleCheckerTests/Pods-CycleCheckerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				219AD8F21E46E002005ED7CC /* AudioToolbox.framework in Frameworks */,
 				2138A8591E2A17310075D9C8 /* CoreBluetooth.framework in Frameworks */,
 				215E56931E206CC00053CD2C /* AVFoundation.framework in Frameworks */,
 				A2082AF375B96FDF808F201C /* Pods_CycleChecker.framework in Frameworks */,
@@ -154,6 +157,7 @@
 		215E56911E206CBF0053CD2C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				219AD8F11E46E002005ED7CC /* AudioToolbox.framework */,
 				2138A8581E2A17310075D9C8 /* CoreBluetooth.framework */,
 				215E56921E206CC00053CD2C /* AVFoundation.framework */,
 				D3D2B0E5171507BBBF3C8F44 /* Pods_CycleChecker.framework */,
@@ -619,6 +623,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.mo-fu.CycleChecker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -633,6 +638,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.mo-fu.CycleChecker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
