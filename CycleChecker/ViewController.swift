@@ -104,6 +104,23 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             print("landscape!!")
             let soundId: SystemSoundID = 1000
             AudioServicesPlaySystemSound(soundId)
+            
+            if level == 0 {
+                // level 0
+            } else if (level >= 1 && level < 4) {
+                Konashi.pinModeAll(0xFF)
+                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
+            } else if (level >= 4 && level < 7) {
+                Konashi.pinModeAll(0xFF)
+                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
+                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.high)
+            } else if level >= 7 {
+                Konashi.pinModeAll(0xFF)
+                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
+                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.high)
+                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
+                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.high)
+            }
         }
     }
     
@@ -122,26 +139,12 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         } else if (level >= 1 && level < 4) {
             print("----- level 1 -----")
             scrView.setContentOffset(CGPoint(x: 375 * 1, y: 0), animated: true)
-            Konashi.pinModeAll(0xFF)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
         } else if (level >= 4 && level < 7) {
             print("----- level 2 -----")
             scrView.setContentOffset(CGPoint(x: 375 * 2, y: 0), animated: true)
-            Konashi.pinModeAll(0xFF)
-            
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.high)
         } else if level >= 7 {
             print("----- level 3 -----")
             scrView.setContentOffset(CGPoint(x: 375 * 3, y: 0), animated: true)
-            Konashi.pinModeAll(0xFF)
-            // Konashi.digitalWrite(KonashiDigitalIOPin.LED4, value: KonashiLevel.high)
-
-            // konashi 0 をHIGH
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.high)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.high)
         }
     }
 
