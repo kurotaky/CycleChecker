@@ -16,6 +16,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     var imageView01: [UIImageView?] = []
     
     var level = 0
+    
+    var tapCounter: Int = 0
 
     @IBOutlet weak var scrView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
@@ -88,13 +90,17 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         // 2本指でスワイプ
         swipeGesture.numberOfTouchesRequired = 2
         self.view.addGestureRecognizer(swipeGesture)
+        
+        let twoTapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTwoTap(sender:)))
+        twoTapGesture.numberOfTouchesRequired = 2
+        self.view.addGestureRecognizer(twoTapGesture)
     }
     
     override func viewDidAppear(_ amimated: Bool) {
         // 端末の向きがかわったらNotificationを呼ばす設定
         NotificationCenter.default.addObserver(self, selector: #selector(self.onOrientationChange(notification:)), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
     }
-    
+
     // 端末の向きがかわったら呼び出される
     func onOrientationChange(notification: NSNotification){
         // 現在のデバイスの向きを取得
@@ -169,6 +175,40 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         print("Swipe!!!!!")
         Konashi.pinModeAll(0xFF)
         Konashi.digitalWriteAll(0x00)
+    }
+    
+    // 2本指でタップ
+    func handleTwoTap(sender: UITapGestureRecognizer) {
+        print("two Tapped!!!")
+        Konashi.pinModeAll(0xFF)
+        Konashi.digitalWriteAll(0x00)
+        if tapCounter % 3 == 0 {
+            print("----- % 3 == 0 -----")
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO4, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.high)
+        } else if tapCounter % 3 == 1 {
+            print("----- % 3 == 1 -----")
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO4, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.low)
+            
+        } else if tapCounter % 3 == 2 {
+            print("----- % 3 == 2 -----")
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO4, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.high)
+        }
+        tapCounter = tapCounter + 1
     }
 
     override func didReceiveMemoryWarning() {
