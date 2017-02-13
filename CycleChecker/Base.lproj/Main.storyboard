@@ -21,18 +21,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6mb-uA-7M2">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6mb-uA-7M2">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ztP-lV-4gD">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="level-0" translatesAutoresizingMaskIntoConstraints="NO" id="ztP-lV-4gD">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="ztP-lV-4gD" firstAttribute="top" secondItem="6mb-uA-7M2" secondAttribute="top" id="37y-MV-4UE"/>
+                                    <constraint firstItem="ztP-lV-4gD" firstAttribute="centerY" secondItem="6mb-uA-7M2" secondAttribute="centerY" id="3jQ-B1-tkh"/>
+                                    <constraint firstItem="ztP-lV-4gD" firstAttribute="centerX" secondItem="6mb-uA-7M2" secondAttribute="centerX" id="L4R-gc-FMz"/>
+                                    <constraint firstAttribute="bottom" secondItem="ztP-lV-4gD" secondAttribute="bottom" id="OHI-su-swH"/>
+                                    <constraint firstItem="ztP-lV-4gD" firstAttribute="leading" secondItem="6mb-uA-7M2" secondAttribute="leading" id="Xtd-qG-H1G"/>
+                                    <constraint firstAttribute="trailing" secondItem="ztP-lV-4gD" secondAttribute="trailing" id="rru-PV-CbK"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6mb-uA-7M2" secondAttribute="trailing" id="3kb-oj-z7V"/>
+                            <constraint firstItem="6mb-uA-7M2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cxu-GG-uNS"/>
+                            <constraint firstItem="6mb-uA-7M2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="mQ2-Jl-5f8"/>
+                            <constraint firstItem="6mb-uA-7M2" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="pAp-UM-Kf8"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="ztP-lV-4gD" id="jjS-4s-Z92"/>
@@ -44,4 +56,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="level-0" width="750" height="1334"/>
+    </resources>
 </document>

@@ -18,6 +18,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     var level = 0
     
     var tapCounter: Int = 0
+    
+    var timer: Timer!
 
     @IBOutlet weak var scrView: UIScrollView!
     @IBOutlet weak var imageView: UIImageView!
@@ -30,28 +32,31 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         Konashi.find(withName: "konashi2-f02774")
 
         // 画像配列を設定
-        img = [UIImage(named:"LEVEL0")!,
-               UIImage(named:"LEVEL1")!,
-               UIImage(named:"LEVEL2")!,
-               UIImage(named:"LEVEL3")!
+        img = [UIImage(named:"level-0")!,
+               UIImage(named:"level-1")!,
+               UIImage(named:"level-2")!,
+               UIImage(named:"level-3")!,
+               UIImage(named:"level-21")!
             ]
         
         // UIImageViewにUIIimageを追加
         imageView01 = [UIImageView(image:img[0]),
                        UIImageView(image:img[1]),
                        UIImageView(image:img[2]),
-                       UIImageView(image:img[3])
+                       UIImageView(image:img[3]),
+                       UIImageView(image:img[4])
         ]
 
         // 全体のサイズ ScrollViewフレームサイズ取得
         let SVSize = scrView.frame.size
+
         // 画像サイズ x 3　高さ CGSizeMake(240*3, 240)
         scrView.contentSize =
             CGSize(width: SVSize.width * CGFloat(img.count), height: SVSize.height)
         
         //UIImageViewのサイズと位置を決める
         //左右に並べる
-        for i in 0...3 {
+        for i in 0...4 {
             var x:CGFloat = 0
             let y:CGFloat = 0
             let width:CGFloat = 375
@@ -67,8 +72,10 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 x = 375 * 3
             } else if i == 4 {
                 x = 375 * 4
+            } else if i == 5 {
+                x = 375 * 5
             }
-            
+        
             // Scrollviewに追加
             imageView01[i]!.frame = CGRect(x: x, y: y, width: width, height: height)
             
@@ -85,7 +92,6 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(sender:)))
         self.view.addGestureRecognizer(tapGesture)
         
-        // スワイプ
         let swipeGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeGesture(sender:)))
         // 2本指でスワイプ
         swipeGesture.numberOfTouchesRequired = 2
@@ -94,6 +100,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let twoTapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.handleTwoTap(sender:)))
         twoTapGesture.numberOfTouchesRequired = 2
         self.view.addGestureRecognizer(twoTapGesture)
+
+        // 4本指でスワイプ
+        let swipeFourGesture: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(self.swipeFourGesture(sender:)))
+        swipeFourGesture.numberOfTouchesRequired = 4
+        self.view.addGestureRecognizer(swipeFourGesture)
     }
     
     override func viewDidAppear(_ amimated: Bool) {
@@ -175,6 +186,20 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         print("Swipe!!!!!")
         Konashi.pinModeAll(0xFF)
         Konashi.digitalWriteAll(0x00)
+        if timer != nil {
+            if timer.isValid == true {
+                timer.invalidate()
+            }
+        }
+    }
+    
+    // 4本指でスワイプすることでLevel21
+    func swipeFourGesture(sender: UISwipeGestureRecognizer) {
+        print("Swipe four fingers!!!!!")
+        print("----- level 21 !!! -----")
+        scrView.setContentOffset(CGPoint(x: 375 * 4, y: 0), animated: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.lightning), userInfo: nil, repeats: true)
+        timer.fire()
     }
     
     // 2本指でタップ
@@ -182,16 +207,20 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         print("two Tapped!!!")
         Konashi.pinModeAll(0xFF)
         Konashi.digitalWriteAll(0x00)
-        if tapCounter % 3 == 0 {
-            print("----- % 3 == 0 -----")
+        lightning()
+    }
+    
+    func lightning() {
+        if tapCounter % 4 == 0 {
+            print("----- % 4 == 0 -----")
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO4, value: KonashiLevel.high)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.high)
-        } else if tapCounter % 3 == 1 {
-            print("----- % 3 == 1 -----")
+        } else if tapCounter % 4 == 1 {
+            print("----- % 4 == 1 -----")
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
@@ -199,12 +228,20 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO4, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.low)
             
-        } else if tapCounter % 3 == 2 {
-            print("----- % 3 == 2 -----")
+        } else if tapCounter % 4 == 2 {
+            print("----- % 4 == 2 -----")
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO4, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.high)
+        } else if tapCounter % 4 == 3 {
+            print("----- % 4 == 3 -----")
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO4, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.high)
         }
