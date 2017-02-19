@@ -126,16 +126,15 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 // level 0
             } else if (level >= 1 && level < 4) {
                 Konashi.pinModeAll(0xFF)
-                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
+                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.high)
             } else if (level >= 4 && level < 7) {
                 Konashi.pinModeAll(0xFF)
-                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
                 Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.high)
+                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.high)
             } else if level >= 7 {
                 Konashi.pinModeAll(0xFF)
                 Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
                 Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.high)
-                Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
                 Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.high)
             }
         }
@@ -198,7 +197,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         print("Swipe four fingers!!!!!")
         print("----- level 21 !!! -----")
         scrView.setContentOffset(CGPoint(x: 375 * 4, y: 0), animated: true)
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.lightning), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.lightning), userInfo: nil, repeats: true)
         timer.fire()
     }
     
@@ -213,29 +212,29 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     func lightning() {
         if tapCounter % 4 == 0 {
             print("----- % 4 == 0 -----")
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.low)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.low)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO4, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO4, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.high)
         } else if tapCounter % 4 == 1 {
             print("----- % 4 == 1 -----")
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.low)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO4, value: KonashiLevel.low)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.low)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.high)
             
         } else if tapCounter % 4 == 2 {
             print("----- % 4 == 2 -----")
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.low)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.low)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO1, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO2, value: KonashiLevel.low)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO3, value: KonashiLevel.high)
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO4, value: KonashiLevel.low)
-            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.high)
+            Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO5, value: KonashiLevel.low)
         } else if tapCounter % 4 == 3 {
             print("----- % 4 == 3 -----")
             Konashi.digitalWrite(KonashiDigitalIOPin.digitalIO0, value: KonashiLevel.high)
